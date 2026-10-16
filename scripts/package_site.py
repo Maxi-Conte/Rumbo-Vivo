@@ -9,6 +9,7 @@ import mimetypes
 from pathlib import Path
 import re
 import zipfile
+from urllib.parse import urldefrag
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,7 +41,11 @@ def build_html():
 
     def embed_html_resource(match):
         attribute, filename = match.groups()
-        return f'{attribute}="{data_uri(ROOT / filename)}"'
+        filename, fragment = urldefrag(filename)
+        source = data_uri(ROOT / filename)
+        if fragment:
+            source += '#' + fragment
+        return f'{attribute}="{source}"'
 
     html = re.sub(r'(src|href)="(assets/[^\"]+)"', embed_html_resource, html)
     scripts = []

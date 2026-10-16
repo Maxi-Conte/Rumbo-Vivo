@@ -64,6 +64,9 @@ class DownloadTests(unittest.TestCase):
             self.assertEqual(page.evaluate('document.styleSheets.length'), 1)
             self.assertEqual(page.locator('body').evaluate('(e) => getComputedStyle(e).backgroundColor'), 'rgb(250, 250, 245)')
             expect(page.locator('.stay-card')).to_have_count(6)
+            expect(page.locator('.team-name')).to_have_count(7)
+            expect(page.locator('.team-section input')).to_have_count(0)
+            expect(page.locator('.brand-mark img')).to_have_count(2)
             page.locator('#load-more').click()
             expect(page.locator('.stay-card')).to_have_count(12)
             for image in page.locator('img').all():
@@ -101,6 +104,12 @@ class DownloadTests(unittest.TestCase):
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.goto(self.base_url + '/extraido/Rumbo-Vivo/index.html', wait_until='networkidle')
             self.assertEqual(page.locator('body').evaluate('(e) => getComputedStyle(e).backgroundColor'), 'rgb(250, 250, 245)')
+            for image in page.locator('.brand-mark img, .andi-portrait img').all():
+                image.scroll_into_view_if_needed()
+                expect(image).to_have_js_property('complete', True)
+                self.assertIsNone(image.get_attribute('data-fallback'))
+                self.assertGreater(image.evaluate('(image) => image.naturalWidth'), 0)
+            expect(page.locator('.team-name')).to_have_count(7)
             expect(page.locator('.destination-card')).to_have_count(6)
             expect(page.locator('.stay-card')).to_have_count(6)
             self.assertEqual(errors, [])

@@ -9,7 +9,11 @@
       content="Descubrí destinos y compará alojamientos con una mirada social, económica y ambiental. Rumbo Vivo: viajá, descubrí y dejá una huella positiva. Demostración académica."
     />
     <title>Rumbo Vivo — Viajes que dejan algo bueno</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="assets/images/andi.svg#retrato"
+      type="image/svg+xml"
+    />
     <link
       rel="preload"
       href="assets/fonts/dm-sans.ttf"
@@ -123,7 +127,11 @@
       <div class="nav-shell">
         <a class="brand" href="#inicio" aria-label="Rumbo Vivo, inicio"
           ><span class="brand-mark"
-            ><svg class="icon"><use href="#i-compass" /></svg></span
+            ><img
+              src="assets/images/andi.svg#retrato"
+              alt="Andi, el cóndor andino de Rumbo Vivo"
+              width="44"
+              height="44" /></span
           ><span
             >rumbo<span class="brand-light">vivo</span
             ><span class="brand-dot">.</span></span
@@ -204,8 +212,12 @@
             class="hero-seal"
             aria-label="Personas, planeta y economía local"
           >
-            <svg class="icon"><use href="#i-leaf" /></svg
-            ><span
+            <img
+              src="assets/images/andi.svg#retrato"
+              alt="Andi nos acompaña"
+              width="48"
+              height="48"
+            /><span
               >Pequeñas decisiones.<br /><strong>Un mejor rumbo.</strong></span
             >
           </div>
@@ -761,71 +773,92 @@
             </details>
           </div>
         </div>
-        <div class="team-section">
+        <aside class="andi-intro reveal" aria-labelledby="andi-title">
+          <div class="andi-portrait">
+            <img
+              src="assets/images/andi.svg"
+              alt="Andi, un cóndor andino de plumaje gris oscuro, collar blanco y pico dorado, con las alas abiertas y detalles verdes"
+              width="320"
+              height="336"
+              loading="lazy"
+            />
+          </div>
+          <div class="andi-copy">
+            <p class="eyebrow">UN COMPAÑERO DE VIAJE</p>
+            <h3 id="andi-title">Hola, soy <em>Andi.</em></h3>
+            <p>
+              Nuestro cóndor andino representa el cuidado de la biodiversidad y
+              el turismo responsable. Nos acompaña para recordar que cada
+              destino es el hogar de su flora, su fauna y sus comunidades.
+            </p>
+            <span class="andi-motto"
+              ><svg class="icon" aria-hidden="true"><use href="#i-leaf" /></svg>
+              Conocer también es cuidar.</span
+            >
+          </div>
+        </aside>
+        <div class="team-section" aria-labelledby="team-title">
           <div class="team-heading">
             <div>
               <p class="eyebrow">LAS PERSONAS DETRÁS DE LA IDEA</p>
-              <h3>Nuestro equipo</h3>
+              <h3 id="team-title">Nuestro equipo</h3>
             </div>
             <p>
-              Un proyecto que se construye en equipo.<br />Completá los nombres
-              para la presentación.
+              Siete miradas, un propósito en común.<br />Pensar una mejor forma
+              de viajar.
             </p>
           </div>
-          <form id="team-form">
-            <div class="team-grid">
-              <div class="team-card">
-                <span class="team-avatar">01</span
-                ><label for="team-1">Integrante 1</label
-                ><input
-                  id="team-1"
-                  name="team-1"
-                  maxlength="65"
-                  placeholder="Nombre y apellido"
-                  autocomplete="off"
-                /><small>Estrategia y propuesta de valor</small>
-              </div>
-              <div class="team-card">
-                <span class="team-avatar">02</span
-                ><label for="team-2">Integrante 2</label
-                ><input
-                  id="team-2"
-                  name="team-2"
-                  maxlength="65"
-                  placeholder="Nombre y apellido"
-                  autocomplete="off"
-                /><small>Experiencia y comunicación</small>
-              </div>
-              <div class="team-card">
-                <span class="team-avatar">03</span
-                ><label for="team-3">Integrante 3</label
-                ><input
-                  id="team-3"
-                  name="team-3"
-                  maxlength="65"
-                  placeholder="Nombre y apellido"
-                  autocomplete="off"
-                /><small>Turismo y triple impacto</small>
-              </div>
-              <div class="team-card">
-                <span class="team-avatar">04</span
-                ><label for="team-4">Integrante 4</label
-                ><input
-                  id="team-4"
-                  name="team-4"
-                  maxlength="65"
-                  placeholder="Nombre y apellido"
-                  autocomplete="off"
-                /><small>Investigación y desarrollo</small>
-              </div>
-            </div>
-            <div class="team-save">
-              <p>Los nombres se guardan solo en este navegador.</p>
-              <button type="submit" class="text-link">
-                Guardar nombres <svg class="icon"><use href="#i-check" /></svg>
-              </button>
-            </div>
-          </form>
+          <ol class="team-grid" role="list" aria-label="Integrantes de Rumbo Vivo">
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">01</span>
+              <h4 class="team-name">Sofia Carolina Becerra</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">02</span>
+              <h4 class="team-name">Julieta Belén Combes</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">03</span>
+              <h4 class="team-name">Benjamin Genco</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">04</span>
+              <h4 class="team-name">Maria Victoria Lucero Herrera</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">05</span>
+              <h4 class="team-name">Catalina Oyarzabal Bastanzo</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">06</span>
+              <h4 class="team-name">Sol Magali Ruiz</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+            <li class="team-card">
+              <span class="team-number" aria-hidden="true">07</span>
+              <h4 class="team-name">Sol Agustina Veisaga Arce</h4>
+              <svg class="icon team-leaf" aria-hidden="true">
+                <use href="#i-leaf" />
+              </svg>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -931,7 +964,11 @@
           <div>
             <a class="brand" href="#inicio"
               ><span class="brand-mark"
-                ><svg class="icon"><use href="#i-compass" /></svg></span
+                ><img
+                  src="assets/images/andi.svg#retrato"
+                  alt="Andi, el cóndor andino de Rumbo Vivo"
+                  width="44"
+                  height="44" /></span
               ><span>rumbo<span class="brand-light">vivo</span>.</span></a
             >
             <p>Viajá, descubrí y dejá una huella positiva.</p>

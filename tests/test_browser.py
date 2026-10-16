@@ -10,6 +10,8 @@ from datetime import date, timedelta
 from playwright.sync_api import sync_playwright, expect
 
 
+TEAM_NAMES = ['Sofia Carolina Becerra', 'Julieta Belén Combes', 'Benjamin Genco', 'Maria Victoria Lucero Herrera', 'Catalina Oyarzabal Bastanzo', 'Sol Magali Ruiz', 'Sol Agustina Veisaga Arce']
+
 class RumboVivoBrowserTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -178,13 +180,14 @@ class RumboVivoBrowserTests(unittest.TestCase):
         self.assertNotIn('POST', requests)
         self.assertFalse(self.page.evaluate("Object.keys(localStorage).some(key => /contact|email|message/.test(key))"))
 
-    def test_11_team_and_preferences_persist(self):
-        self.page.locator('#team-1').fill('María García')
-        self.page.locator('#team-form button[type=submit]').click()
+    def test_11_fixed_team_and_preferences_persist(self):
+        expect(self.page.locator('.team-name')).to_have_text(TEAM_NAMES)
+        expect(self.page.locator('.team-section input, .team-section select, .team-section button')).to_have_count(0)
+        self.page.evaluate("localStorage.setItem('rumbo-vivo:team', '[\"Nombre anterior\"]')")
         self.page.locator('#filter-destination').select_option('roma')
         self.page.locator('#filter-environmental').check()
         self.page.reload()
-        expect(self.page.locator('#team-1')).to_have_value('María García')
+        expect(self.page.locator('.team-name')).to_have_text(TEAM_NAMES)
         expect(self.page.locator('#filter-destination')).to_have_value('roma')
         expect(self.page.locator('#filter-environmental')).to_be_checked()
         expect(self.page.locator('.stay-card h3')).to_have_text('Via Verde')
@@ -240,6 +243,33 @@ class RumboVivoBrowserTests(unittest.TestCase):
             self.page.locator(f'[data-impact-filter="{name}"]').click()
             expect(self.page.locator(f'#filter-{name}')).to_be_checked()
             self.assertGreater(self.page.locator('.stay-card').count(), 0)
+
+
+    def test_17_andi_in_brand_about_and_motion_preferences(self):
+        expect(self.page.locator('.brand-mark img')).to_have_count(2)
+        for image in self.page.locator('.brand-mark img, .andi-portrait img').all():
+            expect(image).to_have_attribute('src', re.compile(r'assets/images/andi\.svg(?:#retrato)?$'))
+            expect(image).to_have_attribute('alt', re.compile('Andi'))
+            image.scroll_into_view_if_needed()
+            expect(image).to_have_js_property('complete', True)
+            self.assertIsNone(image.get_attribute('data-fallback'))
+            self.assertGreater(image.evaluate('(image) => image.naturalWidth'), 0)
+        expect(self.page.locator('#nosotros .andi-intro')).to_contain_text('biodiversidad')
+        expect(self.page.locator('#nosotros .andi-intro')).to_contain_text('turismo responsable')
+        self.page.goto(self.base_url + '/assets/images/andi.svg')
+        for selector in ['.andi-flight', '.andi-wing-left', '.andi-wing-right']:
+            self.assertEqual(self.page.locator(selector).evaluate('(element) => getComputedStyle(element).animationName'), 'none')
+        self.page.emulate_media(reduced_motion='no-preference')
+        self.page.wait_for_function("getComputedStyle(document.querySelector('.andi-wing-left')).animationName !== 'none'")
+        for selector in ['.andi-flight', '.andi-wing-left', '.andi-wing-right']:
+            self.assertGreater(self.page.locator(selector).evaluate('(element) => element.getAnimations().length'), 0)
+
+    def test_18_team_is_readable_without_javascript(self):
+        with self.browser.new_context(java_script_enabled=False) as context:
+            page = context.new_page()
+            page.goto(self.base_url, wait_until='networkidle')
+            expect(page.locator('.team-name')).to_have_text(TEAM_NAMES)
+            expect(page.locator('.team-section input, .team-section button')).to_have_count(0)
 
 
 if __name__ == '__main__':

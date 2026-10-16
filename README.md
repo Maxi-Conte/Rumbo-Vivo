@@ -45,7 +45,7 @@ Conviene usar un servidor estático en lugar de abrir el archivo directamente: a
 - Abrir una ficha con descripción, capacidad, servicios, prácticas declaradas y estado de la información.
 - Calcular un plan ilustrativo: precio por noche multiplicado por noches, sin reservas ni pagos.
 - Probar la validación del formulario de contacto. Los datos no se envían ni se guardan.
-- Completar los nombres del equipo para la exposición y conservarlos localmente.
+- Conocer a los siete integrantes del equipo y a Andi, el cóndor andino de la marca.
 
 Las acciones de la sección de triple impacto aplican filtros reales a los alojamientos. Los accesos de cada destino también cambian los resultados.
 
@@ -69,9 +69,9 @@ Rumbo-Vivo/
 │   ├── data.js           Destinos, alojamientos y prácticas ilustrativas
 │   └── app.js            Búsqueda, filtros, comparación, favoritos y validaciones
 ├── assets/
-│   ├── favicon.svg       Brújula de la marca
+│   ├── favicon.svg       Recurso de la identidad anterior
 │   ├── fonts/            DM Sans, Fraunces y sus licencias
-│   └── images/           Fotografías locales e ilustración de respaldo
+│   └── images/           Fotografías, Andi en SVG e ilustración de respaldo
 ├── tests/
 │   └── test_browser.py   Pruebas funcionales con navegador
 ├── scripts/
@@ -80,7 +80,9 @@ Rumbo-Vivo/
 └── README.md
 ```
 
-Los nombres del equipo pueden cambiarse desde la propia página. Las funciones sugeridas para cada integrante y los textos de misión, visión y modelo de negocio se editan en `index.html`.
+Los siete nombres del equipo están escritos en `index.html`, en una lista de tarjetas fija. Se muestran sin JavaScript y no dependen de LocalStorage. Los textos de misión, visión y modelo de negocio también se editan en ese archivo.
+
+Andi es un cóndor andino original de plumaje gris oscuro, collar blanco y pico dorado. Representa el cuidado de la biodiversidad y el turismo responsable. El recurso vectorial está en `assets/images/andi.svg`: el fragmento `#retrato` muestra su cara en el logo y el ícono de la pestaña, y la versión completa aparece en «Nosotros». La animación de alas y el balanceo se definen en el CSS del propio SVG y se desactivan con `prefers-reduced-motion: reduce`. Todas las rutas son relativas, compatibles con GitHub Pages. La entrega autocontenida también integra el SVG y su fragmento de retrato.
 
 Para agregar alojamientos, mantené un `id` único en `js/data.js` y usá el identificador de uno de los destinos. El orden de los cinco valores de `indicators` coincide con `indicatorNames`. `blocked` contiene intervalos de días relativos a hoy, con inicio incluido y fin excluido. Las imágenes deben estar en `assets/images`; si falla una foto se muestra una ilustración local.
 
@@ -94,7 +96,6 @@ LocalStorage conserva exclusivamente estas claves:
 | ------------------------ | ------------------------------------------------------------------- |
 | `rumbo-vivo:favorites`   | Identificadores de alojamientos favoritos                           |
 | `rumbo-vivo:preferences` | Destino, presupuesto, tipo, criterios, orden y cantidad de viajeros |
-| `rumbo-vivo:team`        | Nombres que se completan en las tarjetas del equipo                 |
 
 Las fechas no se conservan para evitar búsquedas desactualizadas. El contacto no se persiste. Si el navegador bloquea LocalStorage, la página sigue funcionando durante la visita y avisa que no puede guardar. Las preferencias se comparten solo dentro del mismo origen: cambiar de puerto o de navegador no traslada los favoritos.
 
@@ -106,7 +107,7 @@ Con el servidor estático iniciado, ejecutá:
 python3 -m unittest discover -s tests -v
 ```
 
-Las dieciocho pruebas cubren catálogo, imágenes y tipografías locales, destinos, filtros combinados, ordenamiento, fechas inválidas, disponibilidad simulada, capacidad, favoritos persistentes, modales, cálculo del plan, comparador, contacto, equipo, menú móvil, vínculos, anchos de pantalla, LocalStorage dañado o bloqueado e imagen de respaldo. También abren el HTML autocontenido en una carpeta vacía y verifican que el ZIP conserve los estilos y funcione después de extraerlo.
+Las veinte pruebas cubren catálogo, imágenes y tipografías locales, destinos, filtros combinados, ordenamiento, fechas inválidas, disponibilidad simulada, capacidad, favoritos persistentes, modales, cálculo del plan, comparador, contacto, equipo, menú móvil, vínculos, anchos de pantalla, LocalStorage dañado o bloqueado, imagen de respaldo, equipo sin JavaScript y animación de Andi con movimiento reducido. También abren el HTML autocontenido en una carpeta vacía y verifican que el ZIP conserve los estilos y funcione después de extraerlo.
 
 El entorno preparado ya incluye Python, Playwright y Chromium. Para usar las pruebas en otra máquina, instalá Playwright en un entorno virtual y su navegador:
 
@@ -122,7 +123,7 @@ python -m unittest discover -s tests -v
 
 El runner usa `/usr/bin/chromium` si existe y, si no, el navegador instalado por Playwright. Se puede indicar otra ruta con `CHROMIUM_PATH` y otro servidor con `RUMBO_BASE_URL`.
 
-La versión entregada pasó las 18 pruebas en Chromium. También se revisaron visualmente escritorio y móvil y se ejecutó axe-core sobre la página y el modal de detalles, sin infracciones automáticas detectadas de WCAG A/AA en esas vistas. Esto no reemplaza una auditoría manual completa de accesibilidad ni una prueba en todos los navegadores.
+La versión entregada pasó las 20 pruebas en Chromium. También se revisaron visualmente escritorio y móvil y se ejecutó axe-core sobre la página y el modal de detalles, sin infracciones automáticas detectadas de WCAG A/AA en esas vistas. Esto no reemplaza una auditoría manual completa de accesibilidad ni una prueba en todos los navegadores.
 
 ## Regenerar los archivos de entrega
 

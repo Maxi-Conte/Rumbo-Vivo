@@ -1,6 +1,10 @@
 # Recursos visuales
 
-La identidad, el logotipo de brújula, los íconos SVG, la ilustración de respaldo, la composición de la interfaz y el catálogo ficticio forman parte de este proyecto. Las fotografías se utilizan como referencias visuales en la demostración académica; no muestran establecimientos asociados a Rumbo Vivo.
+La identidad, la mascota Andi y su retrato como logotipo, los íconos SVG, la ilustración de respaldo, la composición de la interfaz y el catálogo ficticio forman parte de este proyecto. Las fotografías se utilizan como referencias visuales en la demostración académica; no muestran establecimientos asociados a Rumbo Vivo.
+
+## Andi
+
+`assets/images/andi.svg` es una ilustración vectorial original creada para la identidad de Rumbo Vivo a partir de un concepto visual generado para este proyecto. Representa un cóndor andino con su collar blanco, plumaje gris oscuro y pico dorado. Incluye un retrato reutilizable y animación CSS que respeta la preferencia de movimiento reducido. No reutiliza mascotas de otras marcas.
 
 ## Tipografías
 

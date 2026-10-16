@@ -560,23 +560,6 @@
       if (errorId) $(`#${errorId}`).textContent = "";
     }
   });
-  const savedTeam = readStore("rumbo-vivo:team", []);
-  if (Array.isArray(savedTeam))
-    for (const [index, input] of all("#team-form input").entries())
-      if (typeof savedTeam[index] === "string")
-        input.value = savedTeam[index].slice(0, 65);
-  $("#team-form").addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (
-      writeStore(
-        "rumbo-vivo:team",
-        all("#team-form input").map((input) => input.value.trim()),
-      )
-    )
-      toast(
-        "Nombres guardados en este navegador. Ya podés preparar la presentación.",
-      );
-  });
 
   document.addEventListener(
     "error",
